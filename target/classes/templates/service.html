@@ -6,6 +6,20 @@
     <title>Document</title>
 </head>
 <body>
-    <div th:replace="~{base :: parent('Sonu Kumar from service layer', '25')}"></div>
+    <!-- <div th:replace="~{base :: parent('Sonu Kumar from service layer', '25')}"></div> -->
+     <!-- How to pass div in fragment -->
+      <!-- <div class="host-tag" th:replace="~{base::parent(~{::section})}">
+        <section>
+            This is div from service.html
+            <button>Click Me</button>
+        </section>
+      </div> -->
+      <div class="host-tag" th:replace:~{base::parent(~{::#section-1})}>
+        <section id="section-1">
+            This is div from service.html
+            <button>Click Me</button>
+            <p>This is paragraph from service.html</p>
+        </section>
+      </div>
 </body>
 </html>

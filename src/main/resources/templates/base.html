@@ -1,4 +1,6 @@
-<div class="parent-fragment" th:fragment="parent(x,y)">
+<div class="parent-fragment" th:fragment="parent(content)">
     <h1>This is parent fragment</h1>
-    <p>value of x is <span th:text="${x}"></span></p>
+    <!-- <p>value of x is <span th:text="${x}"></span></p> -->
+     <div th:insert="${content}">
+        <h2>This is default content</h2>
 </div>
