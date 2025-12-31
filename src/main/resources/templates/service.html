@@ -14,12 +14,18 @@
             <button>Click Me</button>
         </section>
       </div> -->
-      <div class="host-tag" th:replace:~{base::parent(~{::#section-1})}>
-        <section id="section-1">
-            This is div from service.html
-            <button>Click Me</button>
-            <p>This is paragraph from service.html</p>
-        </section>
+      <div class="host-tag" th:replace="${isLogin}?~{base::parent(~{::#main-section})}:~{base::parent(~{::#main-section-login})}">
+       <section id="main-section">
+           <p>
+            This is main Section
+           </p>
+       </section>
+       <section id="main-section-login">
+           <p>
+           User Not found. Please Login
+           </p>
+       </section>
+
       </div>
 </body>
 </html>

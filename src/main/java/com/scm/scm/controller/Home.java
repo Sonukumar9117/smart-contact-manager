@@ -23,6 +23,7 @@ public class Home {
     @RequestMapping("/service")
     public String services(Model model){
         model.addAttribute("title", "Services");
+        model.addAttribute("isLogin",true);
         return "service";
     }
 }
