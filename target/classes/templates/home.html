@@ -1,13 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" th:replace="~{base::parent(~{::#content},~{::#pageTitle},~{::script})}">
+<head >
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" data-th-href="@{'/css/output.css'}"/>
+    <title id="pageTitle" data-th-text="${title}">Home</title>
 </head>
-<body class="bg-gray-700 w-full h-screen flex flex-col  justify-center items-center">
-<div class="absolute top-10">
+<body id="content" class="bg-gray-800 w-full h-screen flex flex-col  justify-center items-center">
+<div >
     <h1 class="text-xl font-bold text-white mb-6" data-th-text="${message}">Home</h1>
 </div>
 <div class="w-full max-w-sm  p-6 border  border-default rounded-base shadow-xs bg-[#101828] text-white ">
@@ -32,8 +31,8 @@
         <div class="text-sm font-medium text-body">Not registered? <a href="#" class="text-fg-brand hover:underline">Create account</a></div>
     </form>
 </div>
-
- <script src="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.js"></script>
 </body>
-
+ <script>
+   
+</script>
 </html>
