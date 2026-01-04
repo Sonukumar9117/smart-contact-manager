@@ -1,7 +1,6 @@
 package com.scm.scm.config;
 
 import lombok.RequiredArgsConstructor;
-import org.hibernate.boot.internal.Abstract;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
