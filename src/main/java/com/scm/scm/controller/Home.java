@@ -31,7 +31,13 @@ public class Home {
         model.addAttribute("title", "About Smart Contact Manager");
         return "about";
     }
-    @RequestMapping("/service")
+    
+    @RequestMapping("/")
+    public String index(Model model){
+        return "redirect:/home";
+    }
+    
+    @RequestMapping("service")
     public String services(Model model){
         model.addAttribute("title", "Services");
         model.addAttribute("isLogin",true);

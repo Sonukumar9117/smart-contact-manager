@@ -1,14 +1,12 @@
 package com.scm.scm.config;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.boot.internal.Abstract;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -19,7 +17,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-    private final UserDetailsService userDetailsService;
 //    @Bean
 //    public UserDetailsService userDetailsService(PasswordEncoder passwordEncoder){
 //        UserDetails userDetails= User.withUsername("sonu123").password(passwordEncoder.encode("sonu123")).build();
@@ -33,11 +30,25 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity){
-
+        httpSecurity.csrf(AbstractHttpConfigurer::disable);
         httpSecurity.authorizeHttpRequests(authorize->{
-            authorize.requestMatchers("/user/**","/home").authenticated();
+            authorize.requestMatchers("/user/**","/home","/about","/logout","/services","/user-detail").authenticated();
             authorize.anyRequest().permitAll();
-        }).formLogin(Customizer.withDefaults());
+//            authorize.requestMatchers("/login","/logout").permitAll().anyRequest().authenticated();
+        }).formLogin(
+                httpSecurityFormLoginConfigurer ->
+                {
+                    httpSecurityFormLoginConfigurer
+                            .loginPage("/login")
+                            .loginProcessingUrl("/authenticate")
+                            .successForwardUrl("/home");
+                    httpSecurityFormLoginConfigurer.usernameParameter("email");
+                    httpSecurityFormLoginConfigurer.passwordParameter("password");
+                }
+
+        );
+
+        
         return httpSecurity.build();
     }
 
