@@ -1,5 +1,7 @@
 package com.scm.scm.services;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.scm.scm.entity.Users;
@@ -15,7 +17,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void registerUser(UserForm userForm) {
-        Users user=Users.builder().userName(userForm.getName()).email(userForm.getEmail()).phoneNumber(userForm.getPhone()).password(userForm.getPassword()).build();
+        Users user=Users.builder().
+                userName(userForm.getName())
+                .email(userForm.getEmail())
+                .phoneNumber(userForm.getPhone())
+                .password(new BCryptPasswordEncoder(12).encode(userForm.getPassword()))
+                .build();
         var d=userRepo.save(user);
         System.out.println(d.toString());
     }
