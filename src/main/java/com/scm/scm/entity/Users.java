@@ -29,7 +29,7 @@ public class Users{
     @Id
     @GeneratedValue(  strategy = GenerationType.UUID)
     private String userId;
-    @Column(unique = true , nullable = false)
+    @Column( nullable = false)
     private String userName;
     @Column(unique = true , nullable = false)
     private String email;

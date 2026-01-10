@@ -3,6 +3,7 @@ package com.scm.scm.config;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -21,7 +22,7 @@ public class SecurityConfig {
 //        UserDetails userDetails= User.withUsername("sonu123").password(passwordEncoder.encode("sonu123")).build();
 //        return new InMemoryUserDetailsManager(userDetails);
 //    }
-
+    private  final  AuthenticationSuccessHandler authenticationSuccessHandler;
     @Bean
     public  PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder(12);
@@ -45,6 +46,15 @@ public class SecurityConfig {
                     httpSecurityFormLoginConfigurer.passwordParameter("password");
                 }
 
+        );
+
+        //auth2 login configuration
+//        httpSecurity.oauth2Login(Customizer.withDefaults()); By default login page provided by spring boot
+        httpSecurity.oauth2Login(
+                oauth-> {
+                    oauth.loginPage("/login");
+                    oauth.successHandler(authenticationSuccessHandler);
+                }
         );
 
         

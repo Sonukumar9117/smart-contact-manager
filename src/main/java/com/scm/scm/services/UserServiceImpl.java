@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService {
                 .phoneNumber(userForm.getPhone())
                 .password(new BCryptPasswordEncoder(12).encode(userForm.getPassword()))
                 .build();
+        System.out.println(user+"This user tried to login");
         var d=userRepo.save(user);
         System.out.println(d.toString());
     }

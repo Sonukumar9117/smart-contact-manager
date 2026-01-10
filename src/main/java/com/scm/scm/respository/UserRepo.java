@@ -6,4 +6,5 @@ import com.scm.scm.entity.Users;
 
 public interface UserRepo extends JpaRepository<Users,String>{
     Users findByEmail(String email);
+    Users findByPhoneNumber(String phoneNumber);
 }
